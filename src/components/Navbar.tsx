@@ -1,20 +1,10 @@
-import { useState, useEffect, type MouseEvent } from 'react'
+import { useState, type MouseEvent } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [navOpen, setNavOpen] = useState(false)
   const location = useLocation()
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentY = window.scrollY
-      setIsScrolled(currentY > 12)
-    }
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
 
   const navActive = navOpen || isMobileMenuOpen
 
@@ -45,11 +35,10 @@ const Navbar = () => {
       onMouseLeave={() => !isMobileMenuOpen && setNavOpen(false)}
     >
       <div
-        className={`relative w-[85%] sm:w-[90%] max-w-6xl mx-0 rounded-full border overflow-hidden ${
-          navActive
-            ? 'backdrop-blur-2xl bg-night-900/85 border-white/15 shadow-2xl shadow-trovo-green/20'
-            : 'backdrop-blur-none bg-transparent border-transparent shadow-none'
-        }`}
+        className={`relative w-[85%] sm:w-[90%] max-w-6xl mx-0 rounded-full border overflow-hidden ${navActive
+          ? 'backdrop-blur-2xl bg-night-900/85 border-white/15 shadow-2xl shadow-trovo-green/20'
+          : 'backdrop-blur-none bg-transparent border-transparent shadow-none'
+          }`}
         style={{ transition: `all ${NAV_BG_DURATION}ms ${NAV_EASING}` }}
       >
         <div
@@ -90,9 +79,8 @@ const Navbar = () => {
                 <img
                   src="/trovo.svg"
                   alt="Trovo Fi Logo - Revolutionary Fintech Platform"
-                  className={`h-7 w-7 sm:h-8 sm:w-8 object-contain transition-transform duration-300 ease-out ${
-                    navActive ? 'scale-[1.02] translate-y-[0.5px]' : ''
-                  }`}
+                  className={`h-7 w-7 sm:h-8 sm:w-8 object-contain transition-transform duration-300 ease-out ${navActive ? 'scale-[1.02] translate-y-[0.5px]' : ''
+                    }`}
                   style={{
                     filter: 'brightness(0) saturate(100%) invert(45%) sepia(78%) saturate(2476%) hue-rotate(92deg) brightness(101%) contrast(107%)'
                   }}
@@ -110,20 +98,18 @@ const Navbar = () => {
           {/* Dormant navbar: logo-only by default; items fade/slide in on hover */}
           <div className="hidden md:flex items-center gap-2">
             <div
-              className={`flex items-center gap-1 rounded-full overflow-hidden transition-all duration-350 ease-out ${
-                navActive ? 'bg-white/6 backdrop-blur-xl border border-white/10 px-2 py-1' : 'bg-transparent border border-transparent px-0 py-0'
-              }`}
+              className={`flex items-center gap-1 rounded-full overflow-hidden transition-all duration-350 ease-out ${navActive ? 'bg-white/6 backdrop-blur-xl border border-white/10 px-2 py-1' : 'bg-transparent border border-transparent px-0 py-0'
+                }`}
             >
               {navItems.map((item, idx) => (
                 <Link
                   key={item.path}
                   to={item.path}
                   aria-current={location.pathname === item.path ? 'page' : undefined}
-                  className={`relative flex items-center gap-2 px-3 py-1.5 rounded-full text-sm transition-all ${
-                    navActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1'
-                  } ${location.pathname === item.path ? 'text-white bg-white/10' : 'text-gray-300 hover:text-white hover:bg-white/5'}`}
+                  className={`relative flex items-center gap-2 px-3 py-1.5 rounded-full text-sm transition-all ${navActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1'
+                    } ${location.pathname === item.path ? 'text-white bg-white/10' : 'text-gray-300 hover:text-white hover:bg-white/5'}`}
                   style={{
-                    transition: `opacity ${NAV_TEXT_DURATION}ms ${NAV_EASING}, transform ${NAV_TEXT_DURATION}ms ${NAV_EASING}, color 180ms ease, background-color 180ms ease` ,
+                    transition: `opacity ${NAV_TEXT_DURATION}ms ${NAV_EASING}, transform ${NAV_TEXT_DURATION}ms ${NAV_EASING}, color 180ms ease, background-color 180ms ease`,
                     transitionDelay: navActive ? `${120 + idx * NAV_STAGGER}ms` : '0ms'
                   }}
                 >
@@ -140,9 +126,8 @@ const Navbar = () => {
             <Link
               to="/join"
               onClick={handleEarlyAccessClick}
-              className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-all ${
-                navActive ? 'bg-trovo-green text-white' : 'bg-transparent text-white/70'
-              }`}
+              className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-all ${navActive ? 'bg-trovo-green text-white' : 'bg-transparent text-white/70'
+                }`}
               data-attr="cta:join-early-access"
               style={{
                 transition: `opacity ${NAV_TEXT_DURATION}ms ${NAV_EASING}, transform ${NAV_TEXT_DURATION}ms ${NAV_EASING}, background-color 200ms ease, color 200ms ease`,
@@ -201,17 +186,16 @@ const Navbar = () => {
               aria-hidden
               className="pointer-events-none absolute top-1 left-4 right-4 h-px rounded-full bg-gradient-to-r from-transparent via-white/80 to-transparent"
             />
-            
+
             <div className="py-2 relative">
               {navItems.map((item) => (
                 <div key={item.name}>
                   <Link
                     to={item.path}
-                    className={`block px-4 py-3 font-medium transition-colors ${
-                      location.pathname === item.path
-                        ? 'text-trovo-green bg-trovo-green/10'
-                        : 'text-gray-400 hover:bg-white/5 hover:text-white'
-                    }`}
+                    className={`block px-4 py-3 font-medium transition-colors ${location.pathname === item.path
+                      ? 'text-trovo-green bg-trovo-green/10'
+                      : 'text-gray-400 hover:bg-white/5 hover:text-white'
+                      }`}
                     onClick={() => setIsMobileMenuOpen(false)}
                     aria-current={location.pathname === item.path ? 'page' : undefined}
                   >

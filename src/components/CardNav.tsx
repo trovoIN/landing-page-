@@ -170,7 +170,7 @@ const CardNav: React.FC<CardNavProps> = ({
     if (location.pathname === '/') {
       event.preventDefault()
       event.stopPropagation()
-      
+
       // Close menu first if open
       if (isExpanded) {
         toggleMenu()
@@ -194,9 +194,9 @@ const CardNav: React.FC<CardNavProps> = ({
 
   return (
     <div className={`card-nav-container ${className}`}>
-      <nav 
-        ref={navRef} 
-        className={`card-nav ${isExpanded ? 'open' : ''} ${isScrolled ? 'scrolled' : ''}`} 
+      <nav
+        ref={navRef}
+        className={`card-nav ${isExpanded ? 'open' : ''} ${isScrolled ? 'scrolled' : ''}`}
         style={{ backgroundColor: baseColor }}
       >
         <div className="card-nav-top">
@@ -243,10 +243,10 @@ const CardNav: React.FC<CardNavProps> = ({
               <div className="nav-card-label">{item.label}</div>
               <div className="nav-card-links">
                 {item.links?.map((lnk, i) => (
-                  <a 
-                    key={`${lnk.label}-${i}`} 
-                    className="nav-card-link" 
-                    href={lnk.href} 
+                  <a
+                    key={`${lnk.label}-${i}`}
+                    className="nav-card-link"
+                    href={lnk.href}
                     aria-label={lnk.ariaLabel}
                     onClick={() => {
                       if (isExpanded) {

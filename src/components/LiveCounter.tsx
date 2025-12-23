@@ -37,14 +37,12 @@ const LiveCounter = ({
         totalJoined: initialTotal,
         joinedLast24h: initialLast24h ?? getDayBasedCount(),
     })
-    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
         if (!apiEndpoint) return
 
         const fetchData = async () => {
             try {
-                setIsLoading(true)
                 const response = await fetch(apiEndpoint)
                 if (response.ok) {
                     const newData = await response.json()
@@ -56,8 +54,6 @@ const LiveCounter = ({
                 }
             } catch (error) {
                 console.warn('Failed to fetch live counter data, using fallback', error)
-            } finally {
-                setIsLoading(false)
             }
         }
 

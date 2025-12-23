@@ -1,5 +1,3 @@
-import { useEffect } from 'react'
-
 interface ConfettiParticle {
   x: number
   y: number

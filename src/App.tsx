@@ -28,36 +28,6 @@ function App() {
     document.body.scrollTop = 0
   }, [])
 
-  const items = [
-    { 
-      label: 'About', 
-      bgColor: 'rgba(22, 163, 74, 0.1)', 
-      textColor: '#166534', 
-      links: [ 
-        { label: 'Company', ariaLabel: 'About Company', href: '/about' }, 
-        { label: 'Data Security', ariaLabel: 'Data Security', href: '/data-security' } 
-      ] 
-    },
-    { 
-      label: 'Blog', 
-      bgColor: 'rgba(34, 197, 94, 0.1)', 
-      textColor: '#15803d', 
-      links: [ 
-        { label: 'Articles', ariaLabel: 'Blog Articles', href: '/blog' }, 
-        { label: 'Updates', ariaLabel: 'Product Updates', href: '/blog' } 
-      ] 
-    },
-    { 
-      label: 'Contact', 
-      bgColor: 'rgba(16, 185, 129, 0.1)', 
-      textColor: '#047857', 
-      links: [ 
-        { label: 'Email', ariaLabel: 'Email us', href: 'mailto:support@trovo.online' }, 
-        { label: 'LinkedIn', ariaLabel: 'LinkedIn', href: 'https://www.linkedin.com/company/trovo-fi-private-limited' } 
-      ] 
-    },
-  ]
-
   return (
     <Router>
       <a href="#content" className="skip-to-content">Skip to content</a>

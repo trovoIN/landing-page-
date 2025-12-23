@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 
 interface Feature {
@@ -63,7 +63,6 @@ const FeatureLine: React.FC<{ icon: string; text: string; delay: number }> = ({ 
 )
 
 const TrovoIntelligenceShowcase: React.FC = () => {
-  const [hoveredFeature, setHoveredFeature] = useState<string | null>(null)
   const [activeTab, setActiveTab] = useState<string>('rewards')
 
   const activeFeature = features.find(f => f.id === activeTab) || features[0]
@@ -78,27 +77,27 @@ const TrovoIntelligenceShowcase: React.FC = () => {
         viewport={{ once: true }}
         transition={{ duration: 1.2 }}
       >
-        <motion.div 
+        <motion.div
           className="absolute top-20 left-[10%] w-[500px] h-[500px] bg-trovo-green/10 rounded-full blur-3xl"
-          animate={{ 
+          animate={{
             x: [0, 50, 0],
             y: [0, 30, 0],
             scale: [1, 1.1, 1]
           }}
           transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
         />
-        <motion.div 
+        <motion.div
           className="absolute bottom-20 right-[15%] w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-3xl"
-          animate={{ 
+          animate={{
             x: [0, -40, 0],
             y: [0, -50, 0],
             scale: [1, 1.15, 1]
           }}
           transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         />
-        <motion.div 
+        <motion.div
           className="absolute top-1/2 right-[30%] w-[300px] h-[300px] bg-amber-500/8 rounded-full blur-3xl"
-          animate={{ 
+          animate={{
             x: [0, 30, 0],
             y: [0, -40, 0],
           }}
@@ -115,7 +114,7 @@ const TrovoIntelligenceShowcase: React.FC = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          <motion.p 
+          <motion.p
             className="text-xs sm:text-sm font-semibold tracking-[0.3em] uppercase text-trovo-green mb-4"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -145,13 +144,10 @@ const TrovoIntelligenceShowcase: React.FC = () => {
               <motion.button
                 key={feature.id}
                 onClick={() => setActiveTab(feature.id)}
-                onMouseEnter={() => setHoveredFeature(feature.id)}
-                onMouseLeave={() => setHoveredFeature(null)}
-                className={`w-full text-left p-6 sm:p-8 rounded-2xl border-2 transition-all duration-300 ${
-                  activeTab === feature.id
-                    ? 'border-trovo-green bg-trovo-green/10 backdrop-blur-xl'
-                    : 'border-white/10 bg-white/5 backdrop-blur-xl hover:border-white/20 hover:bg-white/10'
-                }`}
+                className={`w-full text-left p-6 sm:p-8 rounded-2xl border-2 transition-all duration-300 ${activeTab === feature.id
+                  ? 'border-trovo-green bg-trovo-green/10 backdrop-blur-xl'
+                  : 'border-white/10 bg-white/5 backdrop-blur-xl hover:border-white/20 hover:bg-white/10'
+                  }`}
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
@@ -159,22 +155,20 @@ const TrovoIntelligenceShowcase: React.FC = () => {
                       <span className="text-4xl">{feature.icon}</span>
                       <div>
                         <h3 className="text-xl sm:text-2xl font-bold text-white">{feature.title}</h3>
-                        <span className={`inline-flex mt-1 text-xs font-semibold px-3 py-1 rounded-full ${
-                          activeTab === feature.id
-                            ? 'bg-trovo-green/20 text-trovo-green border border-trovo-green/30'
-                            : 'bg-white/10 text-gray-300 border border-white/20'
-                        }`}>
+                        <span className={`inline-flex mt-1 text-xs font-semibold px-3 py-1 rounded-full ${activeTab === feature.id
+                          ? 'bg-trovo-green/20 text-trovo-green border border-trovo-green/30'
+                          : 'bg-white/10 text-gray-300 border border-white/20'
+                          }`}>
                           {feature.badge}
                         </span>
                       </div>
                     </div>
-                    <p className={`text-sm sm:text-base leading-relaxed transition-colors ${
-                      activeTab === feature.id ? 'text-gray-200' : 'text-gray-400'
-                    }`}>
+                    <p className={`text-sm sm:text-base leading-relaxed transition-colors ${activeTab === feature.id ? 'text-gray-200' : 'text-gray-400'
+                      }`}>
                       {feature.description}
                     </p>
                   </div>
-                  
+
                   {activeTab === feature.id && (
                     <motion.div
                       initial={{ scale: 0, rotate: -180 }}
@@ -208,7 +202,7 @@ const TrovoIntelligenceShowcase: React.FC = () => {
             >
               {/* Gradient overlay matching active feature */}
               <div className={`absolute inset-0 bg-gradient-to-br ${activeFeature.color} opacity-50`} />
-              
+
               <div className="relative z-10">
                 {/* Large stat display */}
                 <motion.div
@@ -268,9 +262,9 @@ const TrovoIntelligenceShowcase: React.FC = () => {
           className="relative rounded-3xl border border-white/20 bg-gradient-to-r from-trovo-green/20 via-trovo-green/10 to-transparent backdrop-blur-xl p-8 sm:p-12 md:p-16 overflow-hidden"
         >
           <div className="absolute inset-0 bg-gradient-to-br from-trovo-green/10 via-transparent to-cyan-500/10" />
-          
+
           <div className="relative z-10 max-w-3xl">
-            <motion.p 
+            <motion.p
               className="text-sm font-semibold tracking-[0.3em] uppercase text-trovo-green mb-4"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}

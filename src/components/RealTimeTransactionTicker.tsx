@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 interface Transaction {
@@ -66,11 +66,11 @@ const RealTimeTransactionTicker: React.FC = () => {
         <div className="flex items-center justify-between mb-8">
           <h3 className="text-xl font-bold text-white">Live Rewards</h3>
           <div className="flex items-center gap-2">
-            <motion.span 
+            <motion.span
               className="w-3 h-3 bg-trovo-green rounded-full shadow-lg shadow-trovo-green/50"
               animate={{ scale: [1, 1.4, 1] }}
-              transition={{ 
-                duration: 1.5, 
+              transition={{
+                duration: 1.5,
                 repeat: Infinity,
                 ease: 'easeInOut'
               }}
@@ -82,14 +82,14 @@ const RealTimeTransactionTicker: React.FC = () => {
         {/* Transaction list */}
         <div className="space-y-2">
           <AnimatePresence mode="wait">
-            {displayTransactions.map((tx, idx) => (
+            {displayTransactions.map((tx) => (
               <motion.div
                 key={tx.id}
                 className="flex items-center justify-between p-4 rounded-xl bg-night-800/50 border border-white/5 hover:border-trovo-green/20 transition-colors"
                 initial={{ opacity: 0, x: -20, height: 0 }}
                 animate={{ opacity: 1, x: 0, height: 'auto' }}
                 exit={{ opacity: 0, x: 20, height: 0 }}
-                transition={{ 
+                transition={{
                   duration: 0.4,
                   type: 'spring',
                   stiffness: 300,

@@ -1,4 +1,3 @@
-import React from 'react'
 import { motion, easeOut } from 'framer-motion'
 
 interface UserStory {
@@ -64,13 +63,13 @@ const UserStoriesSection: React.FC = () => {
   }
 
   return (
-    <section 
+    <section
       className="relative py-20 md:py-32 bg-gradient-to-b from-night-900 via-night-800 to-night-900 overflow-hidden"
       aria-labelledby="stories-heading"
     >
       {/* Animated background grid - subtle */}
-      <motion.div 
-        aria-hidden 
+      <motion.div
+        aria-hidden
         className="absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231DB954'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
@@ -79,7 +78,7 @@ const UserStoriesSection: React.FC = () => {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div 
+        <motion.div
           className="text-center max-w-3xl mx-auto mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -89,7 +88,7 @@ const UserStoriesSection: React.FC = () => {
           <p className="text-trovo-gold text-xs sm:text-sm font-semibold uppercase tracking-[0.25em] mb-6">
             REAL STORIES, REAL RESULTS
           </p>
-          <h2 
+          <h2
             id="stories-heading"
             className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 leading-tight"
           >
@@ -101,27 +100,27 @@ const UserStoriesSection: React.FC = () => {
         </motion.div>
 
         {/* Stories Grid */}
-        <motion.div 
+        <motion.div
           className="grid md:grid-cols-3 gap-6 md:gap-8 mb-16"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
         >
-          {userStories.map((story, idx) => (
+          {userStories.map((story) => (
             <motion.div
               key={story.name}
               variants={cardVariants}
               className="relative rounded-3xl border border-trovo-green/10 bg-gradient-to-br from-night-800/80 to-night-900/60 p-8 backdrop-blur-xl overflow-hidden group"
-              whileHover={{ 
-                y: -8, 
+              whileHover={{
+                y: -8,
                 borderColor: 'rgba(29, 185, 84, 0.3)',
                 boxShadow: '0 20px 60px rgba(29, 185, 84, 0.1)'
               }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
             >
               {/* Glow effect on hover */}
-              <motion.div 
+              <motion.div
                 className="absolute inset-0 bg-gradient-to-br from-trovo-green/10 to-transparent opacity-0 group-hover:opacity-100 blur-2xl transition-opacity duration-500"
                 aria-hidden
               />
@@ -151,7 +150,7 @@ const UserStoriesSection: React.FC = () => {
                 </blockquote>
 
                 {/* Highlight badge */}
-                <motion.div 
+                <motion.div
                   className="inline-flex px-4 py-2 rounded-full bg-trovo-green/10 border border-trovo-green/30 w-fit"
                   whileHover={{ scale: 1.05 }}
                 >
@@ -163,7 +162,7 @@ const UserStoriesSection: React.FC = () => {
         </motion.div>
 
         {/* CTA Section */}
-        <motion.div 
+        <motion.div
           className="relative rounded-3xl border border-trovo-gold/20 bg-gradient-to-r from-night-800/50 to-night-900/50 p-8 md:p-12 text-center backdrop-blur-xl"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -176,7 +175,7 @@ const UserStoriesSection: React.FC = () => {
           <p className="text-gray-300 mb-8 text-lg">
             Join thousands already saving with Trovo. See your potential savings in seconds.
           </p>
-          <motion.button 
+          <motion.button
             className="btn-primary text-lg px-8 py-4"
             whileHover={{ scale: 1.06 }}
             whileTap={{ scale: 0.95 }}

@@ -58,8 +58,8 @@ const TrovoIntelligenceSection: React.FC = () => {
       opacity: 1,
       scale: 1,
       y: 0,
-      transition: { 
-        duration: 0.6, 
+      transition: {
+        duration: 0.6,
         ease: 'easeOut' as const,
         type: "spring" as const,
         stiffness: 200,
@@ -69,13 +69,13 @@ const TrovoIntelligenceSection: React.FC = () => {
   }
 
   return (
-    <section 
+    <section
       className="relative py-20 md:py-32 bg-night-900 overflow-hidden"
       aria-labelledby="intelligence-heading"
     >
       {/* Animated hex grid background - very subtle */}
-      <motion.div 
-        aria-hidden 
+      <motion.div
+        aria-hidden
         className="absolute inset-0 opacity-[0.02]"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='50' height='50' viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M25 0L50 14.43V43.3L25 57.73L0 43.3V14.43L25 0Z' fill='%231DB954' fill-rule='evenodd'/%3E%3C/svg%3E")`
@@ -83,13 +83,13 @@ const TrovoIntelligenceSection: React.FC = () => {
       />
 
       {/* Gradient overlays for depth */}
-      <motion.div 
+      <motion.div
         aria-hidden
         className="absolute -top-40 -right-40 w-96 h-96 bg-trovo-green/5 rounded-full blur-3xl"
         animate={{ y: [0, -20, 0] }}
         transition={{ duration: 8, repeat: Infinity, repeatType: 'mirror' }}
       />
-      <motion.div 
+      <motion.div
         aria-hidden
         className="absolute -bottom-40 -left-40 w-80 h-80 bg-trovo-green/3 rounded-full blur-3xl"
         animate={{ y: [0, 20, 0] }}
@@ -98,7 +98,7 @@ const TrovoIntelligenceSection: React.FC = () => {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div 
+        <motion.div
           className="text-center max-w-4xl mx-auto mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -108,7 +108,7 @@ const TrovoIntelligenceSection: React.FC = () => {
           <p className="text-trovo-gold text-xs sm:text-sm font-semibold uppercase tracking-[0.25em] mb-6">
             THE INTELLIGENCE LAYER
           </p>
-          <h2 
+          <h2
             id="intelligence-heading"
             className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight"
           >
@@ -120,26 +120,26 @@ const TrovoIntelligenceSection: React.FC = () => {
         </motion.div>
 
         {/* Modules Grid */}
-        <motion.div 
+        <motion.div
           className="grid md:grid-cols-2 gap-6 md:gap-8 mb-16"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
         >
-          {modules.map((module, idx) => (
+          {modules.map((module) => (
             <motion.div
               key={module.title}
               variants={moduleVariants}
               className="relative rounded-2xl border border-trovo-green/15 bg-gradient-to-br from-night-800/60 to-night-900/40 p-8 backdrop-blur-xl overflow-hidden group"
-              whileHover={{ 
+              whileHover={{
                 borderColor: 'rgba(29, 185, 84, 0.4)',
                 y: -4
               }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
             >
               {/* Hover glow effect */}
-              <motion.div 
+              <motion.div
                 className="absolute inset-0 bg-radial from-trovo-green/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 blur-2xl transition-opacity duration-500"
                 aria-hidden
               />
@@ -155,7 +155,7 @@ const TrovoIntelligenceSection: React.FC = () => {
 
               <div className="relative z-10">
                 {/* Icon */}
-                <motion.span 
+                <motion.span
                   className="text-5xl mb-6 block leading-none"
                   whileHover={{ scale: 1.2, rotate: 10 }}
                   transition={{ type: 'spring', stiffness: 300 }}
@@ -174,7 +174,7 @@ const TrovoIntelligenceSection: React.FC = () => {
                 </p>
 
                 {/* Feature badge */}
-                <motion.div 
+                <motion.div
                   className="inline-flex px-4 py-2 rounded-lg bg-trovo-green/10 border border-trovo-green/30"
                   whileHover={{ scale: 1.05 }}
                 >
@@ -188,7 +188,7 @@ const TrovoIntelligenceSection: React.FC = () => {
         </motion.div>
 
         {/* Bottom insight section */}
-        <motion.div 
+        <motion.div
           className="relative rounded-3xl border border-trovo-gold/15 bg-gradient-to-r from-night-800/50 to-night-900/50 p-8 md:p-12 backdrop-blur-xl"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
