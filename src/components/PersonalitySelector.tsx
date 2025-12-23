@@ -130,7 +130,7 @@ const PersonalitySelector = ({ onSelect }: PersonalitySelectorProps) => {
                             </div>
 
                             {/* RGB split on hover (desktop only) */}
-                            <style jsx>{`
+                            <style>{`
                 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
                   button:hover:not(:disabled) h3 {
                     text-shadow: 1px 0 #00fff9, -1px 0 #ff00de;

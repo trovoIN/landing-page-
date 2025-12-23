@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { useState, InputHTMLAttributes, forwardRef } from 'react'
+import { useState, forwardRef, type InputHTMLAttributes } from 'react'
 
 interface CyberInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
     label: string

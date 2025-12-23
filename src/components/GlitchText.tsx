@@ -17,7 +17,6 @@ const GlitchText = ({
     glitchOnHover = false
 }: GlitchTextProps) => {
     const [displayText, setDisplayText] = useState('')
-    const [isAnimating, setIsAnimating] = useState(true)
     const [isHovered, setIsHovered] = useState(false)
 
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*'
@@ -28,7 +27,6 @@ const GlitchText = ({
 
         if (prefersReducedMotion) {
             setDisplayText(children)
-            setIsAnimating(false)
             return
         }
 
@@ -57,7 +55,6 @@ const GlitchText = ({
                 if (iteration >= totalIterations + 1) {
                     clearInterval(interval)
                     setDisplayText(children)
-                    setIsAnimating(false)
                 }
             }, 50) // 20fps for visible scramble
 
