@@ -10,7 +10,7 @@ const TrovoPhoneMockup = () => {
         transition={{ duration: 4, repeat: Infinity }}
         aria-hidden
       />
-      
+
       {/* Phone frame with premium gradient */}
       <div className="relative w-full h-full bg-gradient-to-b from-gray-700 via-gray-800 to-gray-900 rounded-[2rem] sm:rounded-[2.5rem] md:rounded-[3rem] p-1.5 sm:p-2 md:p-3 shadow-2xl group-hover:shadow-3xl transition-all duration-300 overflow-hidden">
         {/* Notch/Dynamic Island with glow */}
@@ -21,7 +21,7 @@ const TrovoPhoneMockup = () => {
             transition={{ duration: 3, repeat: Infinity }}
           />
         </div>
-        
+
         {/* Screen */}
         <div className="w-full h-full bg-white rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[2.5rem] overflow-hidden relative">
           {/* Status Bar with gradient */}
@@ -29,7 +29,7 @@ const TrovoPhoneMockup = () => {
             <span className="text-xs font-bold">9:41</span>
             <div className="flex items-center space-x-1">
               <svg className="w-3 sm:w-4 md:w-5 h-2 sm:h-3 md:h-4 text-trovo-green" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/>
+                <path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z" />
               </svg>
               <div className="w-1.5 h-1.5 bg-gray-400 rounded-full"></div>
               <div className="w-3 sm:w-4 md:w-6 h-1.5 sm:h-2 md:h-3 border border-gray-400 rounded-sm">
@@ -68,7 +68,7 @@ const TrovoPhoneMockup = () => {
                     whileTap={{ scale: 0.95 }}
                   >
                     <svg className="w-full h-full text-trovo-green" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                     </svg>
                   </motion.button>
                 </div>
@@ -172,9 +172,5 @@ const TrovoPhoneMockup = () => {
     </div>
   )
 }
-
-export default TrovoPhoneMockup
-const TrovoPhoneMockup: React.FC = () => {
-
 
 export default TrovoPhoneMockup
