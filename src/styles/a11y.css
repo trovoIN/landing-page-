@@ -1,0 +1,71 @@
+/* Motion Reduction - WCAG Accessibility */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Keyboard Focus Indicators - Accessibility */
+*:focus-visible {
+  outline: 2px solid theme('colors.trovo-green') !important;
+  outline-offset: 2px !important;
+  border-radius: 4px;
+}
+
+/* Skip to content link for keyboard users */
+.skip-to-content {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: theme('colors.trovo-green');
+  color: theme('colors.night.900');
+  padding: 8px 16px;
+  text-decoration: none;
+  z-index: 200;
+  font-weight: 600;
+  border-radius: 0 0 8px 0;
+}
+
+.skip-to-content:focus {
+  top: 0;
+}
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  * {
+    border-color: currentColor !important;
+  }
+
+  .cyber-glow {
+    box-shadow: none !important;
+  }
+}
+
+/* Ensure sufficient color contrast - WCAG AA minimum */
+:root {
+  --cyber-text-contrast: #FFFFFF;
+  /* 21:1 on black */
+  --cyber-muted-contrast: #B8B8B8;
+  /* 7.3:1 on black */
+  --cyber-green-text: #22D760;
+  /* Enhanced for better contrast on dark */
+}

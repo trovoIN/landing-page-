@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://trovo.app/</loc>
+    <image:image>
+      <image:loc>https://trovo.app/trovo.svg</image:loc>
+      <image:title>Trovo Fi - Revolutionary Fintech Platform</image:title>
+      <image:caption>Trovo Fi transforms credit card points into instant rewards and provides seamless digital payments for Indian users</image:caption>
+      <image:license>https://trovo.app/terms-conditions</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://trovo.app/trovo.svg</image:loc>
+      <image:title>Trovo Fi Logo</image:title>
+      <image:caption>Official logo of Trovo Fi, a trusted fintech platform for credit card optimization</image:caption>
+      <image:license>https://trovo.app/terms-conditions</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trovo.app/about</loc>
+    <image:image>
+      <image:loc>https://trovo.app/about-hero.svg</image:loc>
+      <image:title>About Trovo Fi - Company Story</image:title>
+      <image:caption>Learn about Trovo Fi's mission to revolutionize fintech in India</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://trovo.app/about-mission.svg</image:loc>
+      <image:title>Trovo Fi Mission - Financial Innovation</image:title>
+      <image:caption>Our mission to democratize financial rewards for every Indian</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://trovo.app/about-vision.svg</image:loc>
+      <image:title>Trovo Fi Vision - Future of Fintech</image:title>
+      <image:caption>Building India's most trusted fintech platform</image:caption>
+    </image:image>
+  </url>
+</urlset>

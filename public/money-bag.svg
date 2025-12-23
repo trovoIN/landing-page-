@@ -1,0 +1,35 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Radiant glow -->
+  <ellipse cx="32" cy="38" rx="26" ry="24" fill="url(#bag-radial)" opacity="0.3"/>
+  
+  <!-- Bag tie/knot -->
+  <path d="M24 18C24 18 26 10 28 8C30 6 32 6 32 6C32 6 34 6 36 8C38 10 40 18 40 18" fill="#42ffa1"/>
+  <path d="M24 18C24 18 26 10 28 8C30 6 32 6 32 6C32 6 34 6 36 8C38 10 40 18 40 18" stroke="#131414" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Main bag body -->
+  <path d="M40 18C44 22 50 28 50 38C50 50 42 58 32 58C22 58 14 50 14 38C14 28 20 22 24 18L40 18Z" fill="#42ffa1"/>
+  <path d="M40 18C44 22 50 28 50 38C50 50 42 58 32 58C22 58 14 50 14 38C14 28 20 22 24 18" stroke="#131414" stroke-width="2"/>
+  
+  <!-- White highlight -->
+  <ellipse cx="32" cy="32" rx="12" ry="16" fill="#fff" opacity="0.3"/>
+  
+  <!-- Rupee symbol in circle -->
+  <circle cx="32" cy="36" r="10" fill="#fff"/>
+  <circle cx="32" cy="36" r="10" stroke="#131414" stroke-width="1.5"/>
+  
+  <!-- Rupee symbol -->
+  <path d="M28 32H36M28 34H34M34 34C34 36 33 38 30 40L36 40" stroke="#131414" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Sparkle effects -->
+  <path d="M18 26L20 28L18 30L16 28L18 26Z" fill="#42ffa1" opacity="0.6"/>
+  <path d="M46 30L48 32L46 34L44 32L46 30Z" fill="#42ffa1" opacity="0.6"/>
+  <path d="M22 48L23 49L22 50L21 49L22 48Z" fill="#42ffa1" opacity="0.5"/>
+  <path d="M42 50L43 51L42 52L41 51L42 50Z" fill="#42ffa1" opacity="0.5"/>
+  
+  <defs>
+    <radialGradient id="bag-radial" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#42ffa1" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#42ffa1" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>

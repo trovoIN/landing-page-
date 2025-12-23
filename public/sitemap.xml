@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://trovo.app/</loc>
+    <lastmod>2025-08-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="canonical" href="https://trovo.app/" />
+  </url>
+  <url>
+    <loc>https://trovo.app/about</loc>
+    <lastmod>2025-08-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="canonical" href="https://trovo.app/about" />
+  </url>
+  <url>
+    <loc>https://trovo.app/blog</loc>
+    <lastmod>2025-08-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="canonical" href="https://trovo.app/blog" />
+  </url>
+  <url>
+    <loc>https://trovo.app/privacy-policy</loc>
+    <lastmod>2025-08-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="canonical" href="https://trovo.app/privacy-policy" />
+  </url>
+  <url>
+    <loc>https://trovo.app/terms-conditions</loc>
+    <lastmod>2025-08-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="canonical" href="https://trovo.app/terms-conditions" />
+  </url>
+  <url>
+    <loc>https://trovo.app/refund-policy</loc>
+    <lastmod>2025-08-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+    <xhtml:link rel="canonical" href="https://trovo.app/refund-policy" />
+  </url>
+  <url>
+    <loc>https://trovo.app/data-security</loc>
+    <lastmod>2025-08-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+    <xhtml:link rel="canonical" href="https://trovo.app/data-security" />
+  </url>
+</urlset>

@@ -1,0 +1,43 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Radiant glow -->
+  <rect x="8" y="22" width="48" height="40" rx="4" fill="url(#gift-radial)" opacity="0.25"/>
+  
+  <!-- Main gift box -->
+  <rect x="14" y="28" width="36" height="28" rx="2" fill="#42ffa1"/>
+  <rect x="14" y="28" width="36" height="28" rx="2" stroke="#131414" stroke-width="2"/>
+  
+  <!-- Lid -->
+  <rect x="12" y="20" width="40" height="10" rx="2" fill="#42ffa1"/>
+  <rect x="12" y="20" width="40" height="10" rx="2" stroke="#131414" stroke-width="2"/>
+  
+  <!-- White decorative pattern on box -->
+  <circle cx="24" cy="38" r="2" fill="#fff" opacity="0.4"/>
+  <circle cx="40" cy="38" r="2" fill="#fff" opacity="0.4"/>
+  <circle cx="24" cy="48" r="2" fill="#fff" opacity="0.4"/>
+  <circle cx="40" cy="48" r="2" fill="#fff" opacity="0.4"/>
+  
+  <!-- Vertical ribbon -->
+  <rect x="29" y="20" width="6" height="36" fill="#fff" opacity="0.7"/>
+  <rect x="29" y="20" width="6" height="36" stroke="#131414" stroke-width="1.5"/>
+  
+  <!-- Bow on top -->
+  <ellipse cx="24" cy="16" rx="6" ry="4" fill="#fff" opacity="0.7"/>
+  <ellipse cx="24" cy="16" rx="6" ry="4" stroke="#131414" stroke-width="1.5"/>
+  <ellipse cx="40" cy="16" rx="6" ry="4" fill="#fff" opacity="0.7"/>
+  <ellipse cx="40" cy="16" rx="6" ry="4" stroke="#131414" stroke-width="1.5"/>
+  <circle cx="32" cy="16" r="3" fill="#fff" opacity="0.7"/>
+  <circle cx="32" cy="16" r="3" stroke="#131414" stroke-width="1.5"/>
+  
+  <!-- Sparkles -->
+  <path d="M54 24L55.5 25.5L54 27L52.5 25.5L54 24Z" fill="#42ffa1"/>
+  <path d="M10 34L11.5 35.5L10 37L8.5 35.5L10 34Z" fill="#42ffa1"/>
+  <path d="M54 46L55 47L54 48L53 47L54 46Z" fill="#42ffa1" opacity="0.7"/>
+  <path d="M10 52L11 53L10 54L9 53L10 52Z" fill="#42ffa1" opacity="0.7"/>
+  
+  <defs>
+    <radialGradient id="gift-radial" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#42ffa1" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#42ffa1" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>

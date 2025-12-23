@@ -1,0 +1,40 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="90" fill="#10B981" opacity="0.1"/>
+  <circle cx="100" cy="100" r="75" fill="#10B981" opacity="0.15"/>
+  
+  <!-- Main Icon - Target/Mission -->
+  <g transform="translate(50, 50)">
+    <!-- Outer Target Ring -->
+    <circle cx="50" cy="50" r="45" fill="none" stroke="#10B981" stroke-width="4" opacity="0.3"/>
+    <circle cx="50" cy="50" r="35" fill="none" stroke="#10B981" stroke-width="4" opacity="0.5"/>
+    <circle cx="50" cy="50" r="25" fill="none" stroke="#10B981" stroke-width="4" opacity="0.7"/>
+    
+    <!-- Center Achievement Symbol -->
+    <circle cx="50" cy="50" r="18" fill="#10B981"/>
+    <circle cx="50" cy="50" r="12" fill="white"/>
+    
+    <!-- Checkmark -->
+    <path d="M44 50 L48 54 L56 46" stroke="#10B981" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Directional Arrows -->
+    <g stroke="#10B981" stroke-width="2" fill="none" stroke-linecap="round">
+      <!-- Top Arrow -->
+      <path d="M50 15 L50 25 M45 20 L50 15 L55 20"/>
+      <!-- Right Arrow -->
+      <path d="M85 50 L75 50 M80 45 L85 50 L80 55"/>
+      <!-- Bottom Arrow -->
+      <path d="M50 85 L50 75 M45 80 L50 85 L55 80"/>
+      <!-- Left Arrow -->
+      <path d="M15 50 L25 50 M20 45 L15 50 L20 55"/>
+    </g>
+  </g>
+  
+  <!-- Success Indicators -->
+  <g fill="#10B981" opacity="0.6">
+    <circle cx="35" cy="35" r="2"/>
+    <circle cx="165" cy="35" r="2"/>
+    <circle cx="35" cy="165" r="2"/>
+    <circle cx="165" cy="165" r="2"/>
+  </g>
+</svg>
