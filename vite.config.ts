@@ -10,13 +10,12 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'),
     },
   },
-  server: {
-    proxy: {
-      // Proxy API calls during local development to the Node backend
-      '/api': {
-        target: 'http://localhost:4000',
-        changeOrigin: true,
-      },
-    },
-  },
+  // server: {
+  //   proxy: {
+  //     '/api': {
+  //       target: 'http://localhost:4000',
+  //       changeOrigin: true,
+  //     },
+  //   },
+  // },
 })

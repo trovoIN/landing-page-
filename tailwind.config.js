@@ -37,7 +37,12 @@ export default {
         'trovo-green-200': '#bbf7d0',
       },
       fontFamily: {
-        'sans': ['Inter', 'system-ui', 'sans-serif'],
+        'sans': ['Ubuntu', 'Inter', 'system-ui', 'sans-serif'],
+        'bebas': ['"Bebas Neue"', 'sans-serif'],
+        'bartle': ['"BBH Bartle"', 'sans-serif'],
+        'peace': ['"Peace Sans"', 'sans-serif'],
+        'micro': ['"Micro 5"', 'monospace'],
+        'dancing': ['"Dancing Script"', 'cursive'],
       },
       animation: {
         'fade-in': 'fadeIn 0.6s ease-out',

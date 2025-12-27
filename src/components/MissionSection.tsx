@@ -165,8 +165,8 @@ const MissionSection: React.FC<MissionSectionProps> = ({ variant = 'mission' }) 
 
                     <div className="relative z-10">
                       <div className="w-16 h-16 mb-4 flex items-center justify-center">
-                        <img 
-                          src={`/${metric.iconPath}`} 
+                        <img
+                          src={`/${metric.iconPath}`}
                           alt={metric.title}
                           className="w-14 h-14 object-contain"
                         />
@@ -310,16 +310,15 @@ const SimplePrincipleCard: React.FC<{
         initial={{ opacity: 0 }}
         whileHover={{ opacity: 1 }}
         transition={{ duration: 0.3 }}
-        className={`absolute inset-0 rounded-2xl pointer-events-none ${
-          isPrimary
+        className={`absolute inset-0 rounded-2xl pointer-events-none ${isPrimary
             ? 'bg-gradient-to-r from-trovo-green/30 to-cyan-500/20'
             : 'bg-gradient-to-r from-cyan-500/25 to-trovo-green/20'
-        }`}
+          }`}
       />
 
       <div className="relative z-20 flex items-start gap-3">
         {/* Icon - Enhanced hover effect */}
-        <motion.div 
+        <motion.div
           className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5 transition-all duration-300 ${isPrimary ? 'bg-trovo-green/20 group-hover:bg-trovo-green/40 group-hover:shadow-lg group-hover:shadow-trovo-green/60' : 'bg-cyan-500/15 group-hover:bg-cyan-500/30 group-hover:shadow-lg group-hover:shadow-cyan-500/50'}`}
           whileHover={{ scale: 1.15, rotate: 8 }}
         >
@@ -329,7 +328,7 @@ const SimplePrincipleCard: React.FC<{
         {/* Content */}
         <div className="flex-1">
           {/* Title */}
-          <motion.h4 
+          <motion.h4
             className={`text-lg md:text-xl font-semibold tracking-tight mb-1.5 transition-all duration-300 ${isPrimary ? 'text-white group-hover:text-trovo-green' : 'text-white group-hover:text-cyan-400'}`}
             whileHover={{ letterSpacing: '0.05em' }}
           >
@@ -337,19 +336,20 @@ const SimplePrincipleCard: React.FC<{
           </motion.h4>
 
           {/* Description */}
-          <motion.p 
+          <motion.p
             className={`text-sm md:text-base leading-relaxed transition-all duration-300 ${isPrimary ? 'text-gray-400 group-hover:text-gray-200' : 'text-gray-400 group-hover:text-gray-100'}`}
           >
             {principle.description}
           </motion.p>
 
           {/* Simple line underline - No progress bar */}
-          <div className={`mt-4 h-1 w-16 ${isPrimary ? 'bg-trovo-green/80 group-hover:bg-trovo-green group-hover:w-24' : 'bg-cyan-500/70 group-hover:bg-cyan-500 group-hover:w-24'} rounded-full transition-all duration-300`} />
+          {/* Simple line underline - Expands to full width on hover */}
+          <div className={`mt-4 h-1 w-16 ${isPrimary ? 'bg-trovo-green/80 group-hover:bg-trovo-green group-hover:w-full' : 'bg-cyan-500/70 group-hover:bg-cyan-500 group-hover:w-full'} rounded-full transition-all duration-500 ease-out`} />
         </div>
 
         {/* Tier badge */}
         {isPrimary && (
-          <motion.span 
+          <motion.span
             className="text-xs font-bold text-trovo-green uppercase tracking-widest flex-shrink-0 mt-1 px-3 py-1.5 rounded-lg transition-all duration-300 bg-trovo-green/10 group-hover:bg-trovo-green/30 group-hover:text-trovo-green group-hover:shadow-lg group-hover:shadow-trovo-green/50 border border-trovo-green/30 group-hover:border-trovo-green/80"
             whileHover={{ scale: 1.2, y: -2 }}
           >
@@ -370,7 +370,7 @@ const OperationsCard: React.FC<{
   return (
     <motion.div
       variants={itemVariants}
-      whileHover={{ 
+      whileHover={{
         y: -8,
         boxShadow: `0 20px 60px ${feature.color}30`
       }}
@@ -379,7 +379,7 @@ const OperationsCard: React.FC<{
     >
       {/* Card background */}
       <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/5 to-white/2 backdrop-blur-xl border border-white/20 group-hover:border-white/30 transition-colors duration-300" />
-      
+
       {/* Color accent bar */}
       <motion.div
         initial={{ scaleY: 0 }}

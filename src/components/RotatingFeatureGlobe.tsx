@@ -1,269 +1,477 @@
-import React, { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { Globe } from '@/components/ui/globe'
+import React, { useState } from 'react'
+import { Globe } from './ui/globe'
+import { motion, AnimatePresence } from 'framer-motion'
 
-interface Feature {
-    id: string
-    iconPath: string
-    title: string
-    description: string
-    gradient: string
-    orbitLabel: string
-}
+// Trovo Globe System v1.0 — System Intelligence Layer
+// Not decoration. Not animation. Infrastructure.
 
-const features: Feature[] = [
-    {
-        id: 'instant',
-        iconPath: '/lightning-bolt.svg',
-        title: 'Instant',
-        description: 'Money reaches you when earned, not weeks later.',
-        gradient: 'from-trovo-green to-green-600',
-        orbitLabel: 'Instant'
-    },
-    {
-        id: 'virtual-cards',
-        iconPath: '/12335.svg',
-        title: 'Virtual Cards',
-        description: 'Enable secure credit sharing while maintaining complete financial control.',
-        gradient: 'from-amber-400 to-orange-600',
-        orbitLabel: 'Virtual Cards'
-    },
-    {
-        id: 'intelligent',
-        iconPath: '/calculator.svg',
-        title: 'Intelligent',
-        description: 'Trovo observes how you spend and acts automatically.',
-        gradient: 'from-cyan-400 to-blue-600',
-        orbitLabel: 'Intelligent'
-    },
-    {
-        id: 'everywhere',
-        iconPath: '/money-bag.svg',
-        title: 'Everywhere',
-        description: 'Every rupee spent becomes an opportunity to earn.',
-        gradient: 'from-purple-400 to-pink-600',
-        orbitLabel: 'Everywhere'
-    }
+const features = [
+  { 
+    id: 1, 
+    title: 'Intelligent', 
+    iconPath: '12336.svg', 
+    color: '#42ffa1',
+    description: 'Trovo observes how you spend and acts automatically',
+    benefits: ['Real-time reward optimization', 'Smart category detection', 'Automatic cashback routing']
+  },
+  { 
+    id: 2, 
+    title: 'UPI Cashback', 
+    iconPath: '12335.svg', 
+    color: '#06B6D4',
+    description: 'Experience the simplicity of guaranteed returns on every UPI transaction',
+    benefits: ['Guaranteed 1% cashback', 'Zero spending limits', 'Consistent monthly returns']
+  },
+  { 
+    id: 3, 
+    title: 'Instant', 
+    iconPath: '12337.svg', 
+    color: '#42ffa1',
+    description: 'Money reaches you when earned, not weeks later',
+    benefits: ['Real-time settlement', 'Instant cash conversion', 'Maximize yearly savings']
+  },
+  { 
+    id: 4, 
+    title: 'Virtual Cards', 
+    iconPath: '12338.svg', 
+    color: '#06B6D4',
+    description: 'Enable secure credit sharing while maintaining complete financial control',
+    benefits: ['Unlimited virtual cards', 'Custom spending limits', 'Enhanced security']
+  },
+  { 
+    id: 5, 
+    title: 'Shared', 
+    iconPath: 'shared-spending.svg', 
+    color: '#42ffa1',
+    description: 'Smart group spending with automated settlements',
+    benefits: ['Secure friend sharing', 'Auto-debit settlements', 'Transparent tracking']
+  },
+  { 
+    id: 6, 
+    title: 'Everywhere', 
+    iconPath: '12335.svg', 
+    color: '#06B6D4',
+    description: 'Every rupee spent becomes an opportunity to earn',
+    benefits: ['Cashback on everything', 'No hidden conditions', 'Earn at every merchant']
+  },
 ]
 
 const RotatingFeatureGlobe: React.FC = () => {
-    const [activeIndex, setActiveIndex] = useState(0)
-    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const [selectedFeature, setSelectedFeature] = useState<number>(0)
+  const [isProcessing, setIsProcessing] = useState(false)
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
+  const [showDataArc, setShowDataArc] = useState(false)
 
-    // Auto-rotation every 2 seconds
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setActiveIndex((prev) => (prev + 1) % features.length)
-        }, 2000)
+  // Auto-cycle feature nodes every 5-6 seconds
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setSelectedFeature(prev => (prev + 1) % features.length)
+    }, 5500) // 5.5 seconds
+    return () => clearInterval(interval)
+  }, [])
 
-        return () => clearInterval(interval)
-    }, [])
+  // Check for reduced motion preference
+  React.useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    setPrefersReducedMotion(mediaQuery.matches)
+    
+    const handler = () => setPrefersReducedMotion(mediaQuery.matches)
+    mediaQuery.addEventListener('change', handler)
+    return () => mediaQuery.removeEventListener('change', handler)
+  }, [])
 
-    return (
-        <section className="relative min-h-screen w-full bg-gradient-to-br from-night-900 via-night-800 to-night-900 overflow-hidden py-12 md:py-20 px-4">
-            {/* Enhanced Animated Background Effects */}
-            <motion.div
-                className="absolute top-20 left-10 w-64 h-64 md:w-96 md:h-96 bg-trovo-green/10 rounded-full blur-3xl"
-                animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-                transition={{ duration: 8, repeat: Infinity }}
-            />
-            <motion.div
-                className="absolute bottom-20 right-10 w-64 h-64 md:w-96 md:h-96 bg-cyan-500/10 rounded-full blur-3xl"
-                animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.4, 0.3] }}
-                transition={{ duration: 10, repeat: Infinity, delay: 1 }}
-            />
-            <motion.div
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 md:w-[600px] md:h-[600px] bg-trovo-green/5 rounded-full blur-3xl"
-                animate={{ scale: [1, 1.15, 1], rotate: [0, 180, 360] }}
-                transition={{ duration: 20, repeat: Infinity }}
-            />
+  // Trigger cause→effect flow when feature changes
+  React.useEffect(() => {
+    if (!prefersReducedMotion) {
+      setIsProcessing(true)
+      setShowDataArc(true)
+      
+      // Processing duration
+      const timeout = setTimeout(() => {
+        setIsProcessing(false)
+        setShowDataArc(false)
+      }, 900) // 300ms pause + 600ms arc animation
+      
+      return () => clearTimeout(timeout)
+    }
+  }, [selectedFeature, prefersReducedMotion])
 
-            <div className="relative max-w-7xl mx-auto">
-                {/* Section Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="text-center mb-8 md:mb-12"
+  return (
+    <section className="relative bg-night-900 py-24 md:py-32 overflow-hidden">
+      {/* subtle brand glow */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-24 right-0 w-[28rem] h-[28rem] bg-[#42ffa1]/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-[24rem] h-[24rem] bg-[#06B6D4]/10 rounded-full blur-3xl" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Title Section - Always visible, sticky scroll behavior */}
+        <motion.div 
+          className="text-center mb-16 md:mb-20 sticky top-20 z-20 bg-gradient-to-b from-night-900 via-night-900 to-transparent pb-8"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+        >
+          <motion.span
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ delay: 0.1 }}
+            className="inline-block px-4 py-2 rounded-full bg-white/5 border border-white/20 text-[#42ffa1] text-sm font-semibold tracking-widest uppercase mb-6"
+          >
+            Trovo System Orbit
+          </motion.span>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ delay: 0.15, duration: 0.6 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-4"
+          >
+            Six features,
+            <br />
+            one living system.
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ delay: 0.2 }}
+            className="text-gray-300 text-lg max-w-3xl mx-auto"
+          >
+            Not a list — a network. Your benefits orbit real Indian life: every bill, tap, split, and payment.
+          </motion.p>
+        </motion.div>
+
+        {/* Globe and Cards Side by Side */}
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left: Feature Card (responds to globe) */}
+          <div className="relative h-[500px]">
+            <AnimatePresence mode="wait">
+              {features.map((feature, idx) => {
+                if (idx !== selectedFeature) return null
+                
+                return (
+                  <motion.div
+                    key={feature.id}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3, ease: 'easeOut' }}
+                    className="absolute inset-0"
+                  >
+                    <motion.div
+                      className="h-full rounded-2xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 p-8 flex flex-col justify-between"
+                      style={{
+                        boxShadow: `0 20px 60px ${feature.color}60`
+                      }}
+                      animate={{
+                        borderColor: showDataArc 
+                          ? `${feature.color}40` 
+                          : 'rgba(255,255,255,0.2)'
+                      }}
+                      transition={{ duration: 0.6, ease: 'easeOut' }}
+                    >
+                      <div>
+                        {/* Icon with pulse response */}
+                        <motion.div 
+                          className="mb-6 inline-flex p-4 rounded-2xl bg-white/10 backdrop-blur-md"
+                          animate={{
+                            scale: showDataArc ? 1.05 : 1,
+                            boxShadow: showDataArc 
+                              ? `0 0 20px ${feature.color}60` 
+                              : '0 0 0px transparent'
+                          }}
+                          transition={{ duration: 0.4, ease: 'easeOut' }}
+                        >
+                          <img src={`/${feature.iconPath}`} alt={feature.title} className="w-12 h-12" />
+                        </motion.div>
+
+                        {/* Text brightens when data arrives */}
+                        <motion.h3 
+                          className="text-3xl font-semibold text-white mb-3"
+                          animate={{
+                            opacity: showDataArc ? 1 : 0.9
+                          }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          {feature.title}
+                        </motion.h3>
+                        
+                        <motion.p 
+                          className="text-gray-300 text-base leading-relaxed mb-5"
+                          animate={{
+                            opacity: showDataArc ? 1 : 0.85
+                          }}
+                          transition={{ duration: 0.3, delay: 0.1 }}
+                        >
+                          {feature.description}
+                        </motion.p>
+
+                        {/* Benefits as bullet points */}
+                        <motion.ul 
+                          className="space-y-2.5 mb-6"
+                          animate={{
+                            opacity: showDataArc ? 1 : 0.8
+                          }}
+                          transition={{ duration: 0.3, delay: 0.15 }}
+                        >
+                          {feature.benefits?.map((benefit, bidx) => (
+                            <motion.li
+                              key={bidx}
+                              initial={{ opacity: 0, x: -8 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: bidx * 0.08, duration: 0.3 }}
+                              className="flex items-start gap-2.5 text-gray-400 text-sm"
+                            >
+                              <div className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style={{ background: feature.color }} />
+                              <span>{benefit}</span>
+                            </motion.li>
+                          ))}
+                        </motion.ul>
+                      </div>
+
+                      {/* Micro highlight indicator */}
+                      <div className="flex items-center gap-2 text-sm text-gray-400">
+                        <motion.div 
+                          className="w-2 h-2 rounded-full" 
+                          style={{ background: feature.color }}
+                          animate={{
+                            scale: showDataArc ? [1, 1.3, 1] : 1,
+                            opacity: showDataArc ? [1, 0.6, 1] : 1
+                          }}
+                          transition={{ duration: 0.6 }}
+                        />
+                        <span>Feature {idx + 1} of {features.length}</span>
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                )
+              })}
+            </AnimatePresence>
+          </div>
+
+          {/* Right: Globe with system intelligence */}
+          <div className="relative w-full h-[420px] md:h-[520px]">
+            {/* Globe container */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{ duration: 1.1, ease: 'easeOut' }}
+                animate={{
+                  scale: isProcessing ? 0.98 : 1
+                }}
+                className="relative w-72 h-72 md:w-96 md:h-96"
+                style={{ opacity: 0.85 }} // Reduced glow by 15%
+              >
+                {/* Subtle base glow (reduced) */}
+                <div className="absolute inset-0 rounded-full bg-white/4 blur-2xl" />
+                
+                {/* India emphasis glow (dimmer) */}
+                <div className="absolute inset-[30%] rounded-full bg-[#42ffa1]/8 blur-xl" />
+
+                {/* Main Globe - 90-120 second rotation */}
+                <div 
+                  className="relative z-10 h-full w-full"
+                  style={{
+                    animation: prefersReducedMotion 
+                      ? 'none' 
+                      : 'spin 105s linear infinite'
+                  }}
                 >
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-trovo-green/10 border border-trovo-green/30 mb-6">
-                        <span className="text-xs md:text-sm font-semibold tracking-wider uppercase text-trovo-green">
-                            TROVO SYSTEM ORBIT
-                        </span>
-                    </div>
-                    <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
-                        Six features,<br />one living system.
-                    </h2>
-                    <p className="text-base md:text-lg text-gray-300 max-w-3xl mx-auto">
-                        Not a list — a network. Your benefits orbit real Indian life: every bill, tap, split, and payment.
-                    </p>
+                  <Globe className="h-full w-full" />
+                </div>
+
+                {/* India dot density overlay (higher density) */}
+                <div className="absolute inset-[25%] rounded-full opacity-60">
+                  <div className="absolute top-[35%] left-[45%] w-1 h-1 bg-white/60 rounded-full" />
+                  <div className="absolute top-[40%] left-[50%] w-1 h-1 bg-white/60 rounded-full" />
+                  <div className="absolute top-[45%] left-[48%] w-1 h-1 bg-white/60 rounded-full" />
+                  <div className="absolute top-[38%] left-[52%] w-1 h-1 bg-white/60 rounded-full" />
+                  <div className="absolute top-[42%] left-[46%] w-1 h-1 bg-white/60 rounded-full" />
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Orbit Rings (Secondary Layer) - Differential speeds */}
+            {!prefersReducedMotion && (
+              <>
+                {/* Ring A - Slow, pauses every 7s */}
+                <motion.div 
+                  className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                  animate={{
+                    rotate: 360
+                  }}
+                  transition={{
+                    duration: 48,
+                    repeat: Infinity,
+                    ease: 'linear'
+                  }}
+                >
+                  <div className="w-[340px] h-[340px] md:w-[420px] md:h-[420px] rounded-full border border-white/5" />
                 </motion.div>
 
-                <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-                    {/* LEFT SIDE - Feature Cards */}
-                    <div className="relative z-10 space-y-6 order-2 lg:order-1">
-                        {/* Feature Cards - Stacked with transparency */}
-                        <div className="relative h-[350px] md:h-[400px]">
-                            {features.map((feature, index) => {
-                                const isActive = index === activeIndex
-                                const isHovered = index === hoveredIndex
-                                const shouldHighlight = isActive || isHovered
+                {/* Ring B - Very slow, pauses every 6s */}
+                <motion.div 
+                  className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                  animate={{
+                    rotate: -360
+                  }}
+                  transition={{
+                    duration: 65,
+                    repeat: Infinity,
+                    ease: 'linear'
+                  }}
+                >
+                  <div className="w-[370px] h-[370px] md:w-[450px] md:h-[450px] rounded-full border border-white/8" />
+                </motion.div>
 
-                                return (
-                                    <motion.div
-                                        key={feature.id}
-                                        className="absolute inset-0 cursor-pointer"
-                                        style={{
-                                            zIndex: shouldHighlight ? 20 : 10 - index,
-                                            opacity: shouldHighlight ? 1 : 0.15,
-                                            transform: `translateY(${index * 6}px) scale(${shouldHighlight ? 1 : 0.96})`
-                                        }}
-                                        onClick={() => setActiveIndex(index)}
-                                        onMouseEnter={() => setHoveredIndex(index)}
-                                        onMouseLeave={() => setHoveredIndex(null)}
-                                        whileHover={{ scale: 1.01 }}
-                                        transition={{ duration: 0.3 }}
-                                    >
-                                        <div
-                                            className={`h-full backdrop-blur-sm rounded-2xl md:rounded-3xl border-2 p-6 md:p-8 transition-all duration-300 ${isActive
-                                                ? 'bg-gradient-to-br from-night-800/90 to-night-900/90 border-trovo-green shadow-xl shadow-trovo-green/10'
-                                                : 'bg-night-900/50 border-white/5'
-                                                }`}
-                                        >
-                                            <div className="flex items-start gap-4 md:gap-6">
-                                                {/* SVG Icon */}
-                                                <div
-                                                    className={`p-3 md:p-4 rounded-xl md:rounded-2xl transition-all duration-300 ${isActive
-                                                        ? 'bg-trovo-green/20 ring-2 ring-trovo-green/50'
-                                                        : 'bg-white/5'
-                                                        }`}
-                                                >
-                                                    <img
-                                                        src={feature.iconPath}
-                                                        alt={feature.title}
-                                                        className={`w-8 h-8 md:w-10 md:h-10 transition-all duration-300 ${isActive ? 'brightness-110 drop-shadow-lg' : 'opacity-70'
-                                                            }`}
-                                                    />
-                                                </div>
+                {/* Ring C - Almost still, pauses every 8s */}
+                <motion.div 
+                  className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                  animate={{
+                    rotate: 360
+                  }}
+                  transition={{
+                    duration: 90,
+                    repeat: Infinity,
+                    ease: 'linear'
+                  }}
+                >
+                  <div className="w-[400px] h-[400px] md:w-[480px] md:h-[480px] rounded-full border border-white/10" />
+                </motion.div>
+              </>
+            )}
 
-                                                {/* Content */}
-                                                <div className="flex-1">
-                                                    <h3
-                                                        className={`text-xl md:text-2xl font-bold mb-2 md:mb-3 transition-colors ${isActive ? 'text-white' : 'text-gray-400'
-                                                            }`}
-                                                    >
-                                                        {feature.title}
-                                                    </h3>
-                                                    <p
-                                                        className={`text-sm md:text-base leading-relaxed transition-colors ${isActive ? 'text-gray-300' : 'text-gray-500'
-                                                            }`}
-                                                    >
-                                                        {feature.description}
-                                                    </p>
-                                                </div>
+            {/* Data Arc (Cause → Effect) */}
+            <AnimatePresence>
+              {showDataArc && !prefersReducedMotion && (
+                <motion.svg
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.6, ease: 'easeOut' }}
+                  className="absolute inset-0 pointer-events-none"
+                  style={{ overflow: 'visible' }}
+                >
+                  <motion.path
+                    d="M 50% 50% Q 30% 50%, 10% 50%"
+                    stroke={features[selectedFeature]?.color || '#42ffa1'}
+                    strokeWidth="2"
+                    fill="none"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    animate={{ pathLength: 1, opacity: [0, 0.8, 0] }}
+                    transition={{ 
+                      duration: 0.6, 
+                      ease: 'easeOut',
+                      opacity: { times: [0, 0.3, 1] }
+                    }}
+                    style={{ 
+                      filter: `drop-shadow(0 0 8px ${features[selectedFeature]?.color}80)`
+                    }}
+                  />
+                </motion.svg>
+              )}
+            </AnimatePresence>
 
-                                                {/* Active Indicator */}
-                                                {isActive && (
-                                                    <motion.div
-                                                        initial={{ scale: 0 }}
-                                                        animate={{ scale: 1 }}
-                                                        className="w-2 h-2 md:w-3 md:h-3 bg-trovo-green rounded-full mt-2"
-                                                    />
-                                                )}
-                                            </div>
-                                        </div>
-                                    </motion.div>
-                                )
-                            })}
-                        </div>
+            {/* System Nodes (Tertiary Layer) - Redesigned */}
+            <div className="absolute inset-0">
+              {features.map((f, i) => {
+                const angle = (i / features.length) * 2 * Math.PI
+                const radius = 190
+                const x = Math.cos(angle) * radius
+                const y = Math.sin(angle) * radius
+                
+                const isActive = selectedFeature === i
+                const isDormant = !isActive
 
-                        {/* Pagination Dots */}
-                        <div className="flex items-center justify-center gap-2 md:gap-3 mt-6 md:mt-8">
-                            {features.map((_, index) => (
-                                <button
-                                    key={index}
-                                    onClick={() => setActiveIndex(index)}
-                                    className={`transition-all duration-300 rounded-full ${index === activeIndex
-                                        ? 'w-8 md:w-12 h-2 md:h-3 bg-trovo-green'
-                                        : 'w-2 md:w-3 h-2 md:h-3 bg-white/20 hover:bg-white/40'
-                                        }`}
-                                    aria-label={`Go to feature ${index + 1}`}
-                                />
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* RIGHT SIDE - Globe with Enhanced Effects */}
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        className="relative order-1 lg:order-2"
+                return (
+                  <div
+                    key={f.id}
+                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+                    style={{ 
+                      transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`
+                    }}
+                  >
+                    {/* System Node - Redesigned (darker, less rounded, icon-first) */}
+                    <motion.button
+                      onClick={() => setSelectedFeature(i)}
+                      animate={{
+                        scale: isActive ? 1.05 : 1,
+                        opacity: isDormant ? 0.6 : 1
+                      }}
+                      transition={{ 
+                        duration: 0.2, 
+                        ease: 'easeOut' 
+                      }}
+                      className="group relative flex items-center gap-2 px-3 py-2 bg-night-800/90 border backdrop-blur-md cursor-pointer rounded-md"
+                      style={{
+                        borderColor: isActive ? f.color : 'rgba(255,255,255,0.15)',
+                        boxShadow: isActive 
+                          ? `0 0 20px ${f.color}40` 
+                          : '0 0 0px transparent'
+                      }}
                     >
-                        <div className="relative w-full max-w-[500px] lg:max-w-[600px] aspect-square mx-auto">
-                            {/* Multi-layered Glow Effects */}
-                            <div className="absolute inset-0 bg-gradient-to-r from-trovo-green/20 via-transparent to-cyan-400/20 rounded-full blur-3xl animate-pulse" />
-                            <div className="absolute inset-[10%] bg-gradient-to-br from-trovo-green/10 to-transparent rounded-full blur-2xl" />
+                      {/* Subtle glow on active */}
+                      {isActive && !prefersReducedMotion && (
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 0.3 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="absolute inset-0 rounded-md blur-lg"
+                          style={{ background: f.color }}
+                        />
+                      )}
 
-                            {/* Rotating Gradient Ring */}
-                            <motion.div
-                                className="absolute inset-[5%] rounded-full"
-                                style={{
-                                    background: 'conic-gradient(from 0deg, transparent, rgba(16, 185, 129, 0.3), transparent, rgba(6, 182, 212, 0.3), transparent)'
-                                }}
-                                animate={{ rotate: 360 }}
-                                transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
-                            />
+                      {/* Icon first */}
+                      <img 
+                        src={`/${f.iconPath}`} 
+                        alt={f.title} 
+                        className="w-5 h-5 relative z-10" 
+                        style={{
+                          filter: isActive ? 'none' : 'grayscale(0.3)'
+                        }}
+                      />
+                      
+                      {/* Label with reduced contrast */}
+                      <span 
+                        className="text-white font-semibold text-xs relative z-10"
+                        style={{
+                          opacity: isActive ? 1 : 0.7
+                        }}
+                      >
+                        {f.title}
+                      </span>
 
-                            {/* Inner Orbit Ring with Pulse */}
-                            <motion.div
-                                className="absolute inset-[12%] rounded-full border border-trovo-green/30"
-                                animate={{
-                                    boxShadow: ['0 0 10px rgba(16, 185, 129, 0.2)', '0 0 20px rgba(16, 185, 129, 0.4)', '0 0 10px rgba(16, 185, 129, 0.2)']
-                                }}
-                                transition={{ duration: 2, repeat: Infinity }}
-                            />
-
-                            {/* Outer Orbit Ring */}
-                            <div className="absolute inset-[4%] rounded-full border border-white/10" />
-
-
-                            {/* Floating Particles */}
-                            {[...Array(8)].map((_, i) => (
-                                <motion.div
-                                    key={i}
-                                    className="absolute w-1 h-1 bg-trovo-green/60 rounded-full"
-                                    style={{
-                                        left: `${20 + Math.random() * 60}%`,
-                                        top: `${20 + Math.random() * 60}%`,
-                                    }}
-                                    animate={{
-                                        y: [0, -20, 0],
-                                        opacity: [0.2, 0.8, 0.2],
-                                        scale: [1, 1.5, 1]
-                                    }}
-                                    transition={{
-                                        duration: 3 + Math.random() * 2,
-                                        repeat: Infinity,
-                                        delay: Math.random() * 2
-                                    }}
-                                />
-                            ))}
-
-                            {/* Globe Container with Enhanced Lighting */}
-                            <div className="absolute inset-[15%]">
-                                <div className="relative h-full w-full">
-                                    {/* Inner glow */}
-                                    <div className="absolute inset-0 bg-gradient-radial from-white/5 to-transparent rounded-full" />
-                                    <Globe className="h-full w-full" />
-                                </div>
-                            </div>
-                        </div>
-                    </motion.div>
-                </div>
+                      {/* Processing state indicator */}
+                      {isProcessing && isActive && (
+                        <motion.div
+                          className="absolute -top-1 -right-1 w-2 h-2 rounded-full"
+                          style={{ background: f.color }}
+                          animate={{
+                            scale: [1, 1.3, 1],
+                            opacity: [1, 0.6, 1]
+                          }}
+                          transition={{ 
+                            duration: 0.3,
+                            repeat: 2
+                          }}
+                        />
+                      )}
+                    </motion.button>
+                  </div>
+                )
+              })}
             </div>
-        </section>
-    )
+          </div>
+        </div>
+      </div>
+    </section>
+  )
 }
 
 export default RotatingFeatureGlobe

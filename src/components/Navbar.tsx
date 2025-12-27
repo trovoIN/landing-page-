@@ -22,8 +22,15 @@ const Navbar = () => {
   ]
 
   const handleEarlyAccessClick = (event?: MouseEvent<HTMLAnchorElement>) => {
-    event?.preventDefault()
-    window.location.assign('/join')
+    if (location.pathname === '/') {
+      event?.preventDefault()
+      const el = document.getElementById('early-access')
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      } else {
+        window.location.hash = '#early-access'
+      }
+    }
   }
 
   return (
@@ -62,7 +69,7 @@ const Navbar = () => {
           style={{ transition: `opacity ${NAV_BG_DURATION}ms ${NAV_EASING}` }}
         />
 
-        <div className="relative flex items-center justify-between px-6 sm:px-8 h-12 sm:h-14">
+        <div className="relative flex items-center justify-between px-3 sm:px-4 h-12 sm:h-14">
           <div className="flex items-center justify-start">
             <Link
               to="/"
@@ -124,7 +131,7 @@ const Navbar = () => {
 
           <div className="hidden md:flex items-center gap-2">
             <Link
-              to="/join"
+              to="/#early-access"
               onClick={handleEarlyAccessClick}
               className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-all ${navActive ? 'bg-trovo-green text-white' : 'bg-transparent text-white/70'
                 }`}
@@ -205,7 +212,7 @@ const Navbar = () => {
               ))}
               <div className="border-t border-white/10 mt-2 pt-2">
                 <Link
-                  to="/join"
+                  to="/#early-access"
                   onClick={(event: MouseEvent<HTMLAnchorElement>) => {
                     handleEarlyAccessClick(event)
                     setIsMobileMenuOpen(false)

@@ -5,6 +5,7 @@ interface LiveCounterProps {
     apiEndpoint?: string
     initialTotal?: number
     initialLast24h?: number
+    useMock?: boolean
 }
 
 interface CounterData {
@@ -31,7 +32,8 @@ function getDayBasedCount() {
 const LiveCounter = ({
     apiEndpoint,
     initialTotal = 1236,
-    initialLast24h
+    initialLast24h,
+    useMock = false
 }: LiveCounterProps) => {
     const [data, setData] = useState<CounterData>({
         totalJoined: initialTotal,
@@ -39,9 +41,20 @@ const LiveCounter = ({
     })
 
     useEffect(() => {
-        if (!apiEndpoint) return
+        if (!apiEndpoint && !useMock) return
 
         const fetchData = async () => {
+            if (useMock) {
+                setData({
+                    totalJoined: initialTotal + Math.floor(Math.random() * 5),
+                    joinedLast24h: (initialLast24h || getDayBasedCount()) + Math.floor(Math.random() * 2),
+                    timestamp: new Date().toISOString()
+                })
+                return
+            }
+
+            if (!apiEndpoint) return
+
             try {
                 const response = await fetch(apiEndpoint)
                 if (response.ok) {
