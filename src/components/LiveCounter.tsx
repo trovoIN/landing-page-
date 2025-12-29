@@ -45,9 +45,10 @@ const LiveCounter = ({
 
         const fetchData = async () => {
             if (useMock) {
+                // Use exact initial values without random numbers
                 setData({
-                    totalJoined: initialTotal + Math.floor(Math.random() * 5),
-                    joinedLast24h: (initialLast24h || getDayBasedCount()) + Math.floor(Math.random() * 2),
+                    totalJoined: initialTotal,
+                    joinedLast24h: initialLast24h || getDayBasedCount(),
                     timestamp: new Date().toISOString()
                 })
                 return
@@ -67,6 +68,12 @@ const LiveCounter = ({
                 }
             } catch (error) {
                 console.warn('Failed to fetch live counter data, using fallback', error)
+                // Fallback to initial values (NOT random numbers)
+                setData({
+                    totalJoined: initialTotal,
+                    joinedLast24h: initialLast24h || getDayBasedCount(),
+                    timestamp: new Date().toISOString()
+                })
             }
         }
 
