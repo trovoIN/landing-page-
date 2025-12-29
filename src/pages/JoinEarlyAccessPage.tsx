@@ -10,6 +10,7 @@ import CyberInput from '@/components/CyberInput'
 import GridDistortionTinted from '@/components/GridDistortionTinted'
 import GlitchParticles from '@/components/GlitchParticles'
 import EntrySequence from '@/components/EntrySequence'
+import { API_ENDPOINTS } from '@/config/api'
 
 const JoinEarlyAccessPage = () => {
   const [email, setEmail] = useState('')
@@ -48,7 +49,7 @@ const JoinEarlyAccessPage = () => {
 
     // Submit to backend
     try {
-      const response = await fetch('/api/early-access', {
+      const response = await fetch(API_ENDPOINTS.EARLY_ACCESS, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
@@ -156,8 +157,9 @@ const JoinEarlyAccessPage = () => {
 
               {/* Live Counter */}
               <LiveCounter
+                apiEndpoint={API_ENDPOINTS.USER_COUNT}
                 initialTotal={1236}
-                useMock={true}
+                useMock={false}
               />
 
 

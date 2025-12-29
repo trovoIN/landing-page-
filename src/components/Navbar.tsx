@@ -21,18 +21,6 @@ const Navbar = () => {
     { name: 'Data Security', path: '/data-security' },
   ]
 
-  const handleEarlyAccessClick = (event?: MouseEvent<HTMLAnchorElement>) => {
-    if (location.pathname === '/') {
-      event?.preventDefault()
-      const el = document.getElementById('early-access')
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      } else {
-        window.location.hash = '#early-access'
-      }
-    }
-  }
-
   return (
     <nav
       className="fixed inset-x-0 top-4 sm:top-6 z-50 flex justify-center overflow-x-hidden"
@@ -131,8 +119,7 @@ const Navbar = () => {
 
           <div className="hidden md:flex items-center gap-2">
             <Link
-              to="/#early-access"
-              onClick={handleEarlyAccessClick}
+              to="/join"
               className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-all ${navActive ? 'bg-trovo-green text-white' : 'bg-transparent text-white/70'
                 }`}
               data-attr="cta:join-early-access"
@@ -212,11 +199,8 @@ const Navbar = () => {
               ))}
               <div className="border-t border-white/10 mt-2 pt-2">
                 <Link
-                  to="/#early-access"
-                  onClick={(event: MouseEvent<HTMLAnchorElement>) => {
-                    handleEarlyAccessClick(event)
-                    setIsMobileMenuOpen(false)
-                  }}
+                  to="/join"
+                  onClick={() => setIsMobileMenuOpen(false)}
                   className="block mx-2 my-2 text-center rounded-xl bg-trovo-green text-white px-4 py-3 font-semibold hover:bg-trovo-green/90"
                   data-attr="cta:join-early-access"
                 >
