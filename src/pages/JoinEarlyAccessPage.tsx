@@ -58,6 +58,10 @@ const JoinEarlyAccessPage = () => {
       if (response.ok) {
         setIsSubmitted(true)
         setShowConfetti(true)
+
+        // Trigger immediate counter refetch
+        window.dispatchEvent(new Event('refetch-count'))
+
         // Stop confetti after 5 seconds
         setTimeout(() => setShowConfetti(false), 5000)
       }

@@ -74,8 +74,18 @@ const LiveCounter = ({
 
         // Poll every 30 seconds for real-time updates
         const interval = setInterval(fetchData, 30000)
-        return () => clearInterval(interval)
-    }, [apiEndpoint, initialTotal])
+
+        // Listen for immediate refetch events (triggered after email submission)
+        const handleRefetch = () => {
+            fetchData()
+        }
+        window.addEventListener('refetch-count', handleRefetch)
+
+        return () => {
+            clearInterval(interval)
+            window.removeEventListener('refetch-count', handleRefetch)
+        }
+    }, [apiEndpoint, initialTotal, initialLast24h, useMock])
 
     // Animated counter hook
     const useCountUp = (target: number, duration: number = 1000) => {
