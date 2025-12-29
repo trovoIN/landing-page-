@@ -31,7 +31,7 @@ function getDayBasedCount() {
 
 const LiveCounter = ({
     apiEndpoint,
-    initialTotal = 1236,
+    initialTotal = 3726,
     initialLast24h,
     useMock = false
 }: LiveCounterProps) => {
