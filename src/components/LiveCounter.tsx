@@ -42,10 +42,16 @@ const LiveCounter = ({
     })
 
     useEffect(() => {
+        console.log('🔍 LiveCounter mounted - Version: 2024-12-30-10:20')
+        console.log('📊 Config:', { apiEndpoint, initialTotal, useMock })
+
         if (!apiEndpoint && !useMock) return
 
         const fetchData = async () => {
+            console.log('🔄 fetchData called')
+
             if (useMock) {
+                console.log('🎭 Using MOCK mode')
                 // Use exact initial values without random numbers
                 setData({
                     totalJoined: initialTotal,
@@ -58,17 +64,21 @@ const LiveCounter = ({
             if (!apiEndpoint) return
 
             try {
+                console.log('🌐 Fetching from API:', apiEndpoint)
                 const response = await fetch(apiEndpoint)
                 if (response.ok) {
                     const newData = await response.json()
+                    console.log('✅ API Data received:', newData)
                     setData({
                         totalJoined: newData.totalCount || newData.totalJoined || initialTotal,
                         joinedLast24h: newData.joinedLast24h || getDayBasedCount(),
                         timestamp: newData.timestamp
                     })
+                } else {
+                    console.warn('⚠️ API response not OK:', response.status)
                 }
             } catch (error) {
-                console.warn('Failed to fetch live counter data, using fallback', error)
+                console.error('❌ API fetch FAILED - Using fallback:', error)
                 // Fallback to initial values (NOT random numbers)
                 setData({
                     totalJoined: initialTotal,
