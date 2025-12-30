@@ -162,7 +162,7 @@ const JoinEarlyAccessPage = () => {
               {/* Live Counter */}
               <LiveCounter
                 apiEndpoint={API_ENDPOINTS.USER_COUNT}
-                initialTotal={3726}
+                initialTotal={3729}
                 useMock={false}
               />
 
