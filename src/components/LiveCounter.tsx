@@ -1,5 +1,5 @@
 // Version: 2024-12-30-10:13 - Fixed random numbers issue
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 
 interface LiveCounterProps {
@@ -41,6 +41,11 @@ const LiveCounter = ({
         joinedLast24h: initialLast24h ?? getDayBasedCount(),
     })
 
+    // Debug: Log whenever data changes
+    useEffect(() => {
+        console.log('🔄 Data state changed:', data)
+    }, [data])
+
     useEffect(() => {
         console.log('🔍 LiveCounter mounted - Version: 2024-12-30-10:20')
         console.log('📊 Config:', { apiEndpoint, initialTotal, useMock })
@@ -69,22 +74,26 @@ const LiveCounter = ({
                 if (response.ok) {
                     const newData = await response.json()
                     console.log('✅ API Data received:', newData)
-                    setData({
+                    const processedData = {
                         totalJoined: newData.totalCount || newData.totalJoined || initialTotal,
                         joinedLast24h: newData.joinedLast24h || getDayBasedCount(),
                         timestamp: newData.timestamp
-                    })
+                    }
+                    console.log('📝 Setting data to:', processedData)
+                    setData(processedData)
                 } else {
                     console.warn('⚠️ API response not OK:', response.status)
                 }
             } catch (error) {
                 console.error('❌ API fetch FAILED - Using fallback:', error)
                 // Fallback to initial values (NOT random numbers)
-                setData({
+                const fallbackData = {
                     totalJoined: initialTotal,
                     joinedLast24h: initialLast24h || getDayBasedCount(),
                     timestamp: new Date().toISOString()
-                })
+                }
+                console.log('📝 Setting fallback data to:', fallbackData)
+                setData(fallbackData)
             }
         }
 
@@ -143,6 +152,11 @@ const LiveCounter = ({
     const animatedTotal = useCountUp(data.totalJoined)
     const animatedLast24h = useCountUp(data.joinedLast24h)
 
+    // Debug: Log animated values
+    useEffect(() => {
+        console.log('🎬 Animated values:', { animatedTotal, animatedLast24h, dataTotal: data.totalJoined, dataLast24h: data.joinedLast24h })
+    }, [animatedTotal, animatedLast24h, data.totalJoined, data.joinedLast24h])
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -165,17 +179,13 @@ const LiveCounter = ({
                     {/* Total Joined */}
                     <div className="space-y-2">
                         <div className="flex items-baseline gap-2">
-                            <AnimatePresence mode="wait">
-                                <motion.span
-                                    key={animatedTotal}
-                                    initial={{ opacity: 0, y: -10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: 10 }}
-                                    className="text-4xl md:text-5xl font-bold text-white font-mono"
-                                >
-                                    {animatedTotal > 0 ? `${animatedTotal.toLocaleString()}+` : '—'}
-                                </motion.span>
-                            </AnimatePresence>
+                            <motion.span
+                                initial={{ opacity: 0, y: -10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="text-4xl md:text-5xl font-bold text-white font-mono"
+                            >
+                                {animatedTotal > 0 ? `${animatedTotal.toLocaleString()}+` : '—'}
+                            </motion.span>
                         </div>
                         <p className="text-sm md:text-base text-gray-400">
                             people joined
@@ -185,17 +195,13 @@ const LiveCounter = ({
                     {/* Last 24 Hours */}
                     <div className="space-y-2">
                         <div className="flex items-baseline gap-2">
-                            <AnimatePresence mode="wait">
-                                <motion.span
-                                    key={animatedLast24h}
-                                    initial={{ opacity: 0, y: -10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: 10 }}
-                                    className="text-4xl md:text-5xl font-bold text-trovo-green font-mono"
-                                >
-                                    {animatedLast24h > 0 ? animatedLast24h.toLocaleString() : '—'}
-                                </motion.span>
-                            </AnimatePresence>
+                            <motion.span
+                                initial={{ opacity: 0, y: -10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="text-4xl md:text-5xl font-bold text-trovo-green font-mono"
+                            >
+                                {animatedLast24h > 0 ? animatedLast24h.toLocaleString() : '—'}
+                            </motion.span>
                         </div>
                         <p className="text-sm md:text-base text-gray-400">
                             in the last 24 hours
